@@ -1,0 +1,16 @@
+
+*.ipch
+*.db
+Battleships library/.vs/Battleships library/v15/.suo
+*.lastbuildstate
+*.lastbuildstate
+*.tlog
+*.tlog
+*.exe
+*.exe
+*.ilk
+*.idb
+*.obj
+*.obj
+*.log
+*.pdb
