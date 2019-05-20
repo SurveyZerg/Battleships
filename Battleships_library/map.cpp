@@ -1,15 +1,12 @@
 //map.cpp
 
 #include "map.h"
-#include <iostream>
-
-Map map; //глобальная переменная
 
 Map::Map()
 {
-	for (int i = 0; i < length; i++)
+	for (int i = 0; i < LENGTH; i++)
 	{
-		for (int j = 0; j < height; j++)
+		for (int j = 0; j < HEIGHT; j++)
 		{
 			ship_on_map[i][j] = 0;
 		}
@@ -44,12 +41,12 @@ void Map::Set_ship(Ship &ship, int Ox, int Oy, bool vertically) /*Нужно, чтобы и
 		int a = 0; //счетчик, чтобы правильно поставить корабль, когда только часть выходит за пределы
 		for (int i = 1;i <ship.Get_size_of_ship(); i++)
 		{
-			if (Ox + i <= length)
+			if (Ox + i <= LENGTH)
 			{
 				ship_on_map[Ox - 1 + i][Oy - 1] = &ship;
 				a++;
 			}
-			else if (Ox + i > length)
+			else if (Ox + i > LENGTH)
 			{
 				ship_on_map[Ox - 1 - i + a][Oy - 1] = &ship;
 			}
@@ -60,12 +57,12 @@ void Map::Set_ship(Ship &ship, int Ox, int Oy, bool vertically) /*Нужно, чтобы и
 		int a = 0; //счетчик, чтобы правильно поставить корабль, когда только часть выходит за пределы
 		for (int i = 1; i < ship.Get_size_of_ship(); i++)
 		{
-			if (Oy + i <= height)
+			if (Oy + i <= HEIGHT)
 			{
 				ship_on_map[Ox - 1][Oy - 1 + i] = &ship;
 				a++;
 			}
-			else if (Oy + i > height)
+			else if (Oy + i > HEIGHT)
 			{
 				ship_on_map[Ox - 1][Oy - 1 - i + a] = &ship;
 			}

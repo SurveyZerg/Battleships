@@ -4,7 +4,7 @@
 
 Ship_x2::Ship_x2()
 {
-	Set_amount_of_ships(2);
+	Set_amount_of_ships(AMOUNT_OF_X2_SHIPS);
 	Set_size_of_ship(2);
 }
 int Ship_x2::Get_amount_of_ships()
