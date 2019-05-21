@@ -1,6 +1,7 @@
 //map.cpp
 
 #include "map.h"
+#include <iostream>
 
 Map::Map()
 {
@@ -8,7 +9,7 @@ Map::Map()
 	{
 		for (int j = 0; j < HEIGHT; j++)
 		{
-			ship_on_map[i][j] = 0;
+			ship_on_map[i][j] = NULL;
 		}
 	}
 }
@@ -35,11 +36,10 @@ void Map::Set_ship(Ship &ship, int Ox, int Oy, bool vertically) /*Ќужно, чтобы и
 	*/
 
 	//”становка корабл€ на карту, провер€€ границы пол€
-	ship_on_map[Ox - 1][Oy - 1] = &ship;
 	if (vertically == false)
 	{
 		int a = 0; //счетчик, чтобы правильно поставить корабль, когда только часть выходит за пределы
-		for (int i = 1;i <ship.Get_size_of_ship(); i++)
+		for (int i = 0;i < ship.Get_size_of_ship(); i++)
 		{
 			if (Ox + i <= LENGTH)
 			{
@@ -55,7 +55,7 @@ void Map::Set_ship(Ship &ship, int Ox, int Oy, bool vertically) /*Ќужно, чтобы и
 	else if (vertically == true)
 	{
 		int a = 0; //счетчик, чтобы правильно поставить корабль, когда только часть выходит за пределы
-		for (int i = 1; i < ship.Get_size_of_ship(); i++)
+		for (int i = 0; i < ship.Get_size_of_ship(); i++)
 		{
 			if (Oy + i <= HEIGHT)
 			{

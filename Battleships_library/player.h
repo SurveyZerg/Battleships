@@ -10,4 +10,7 @@ private:
 public:
 	void Set_ship(Ship &ship, int Ox, int Oy, bool vertically = false);
 	Ship* Get_ship(int Ox, int Oy);
+
+	void show_map();
+	void show_ships();
 };
