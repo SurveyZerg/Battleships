@@ -113,3 +113,10 @@ void printBigXblink(){
       delay(random(100));
   }
 }
+
+void drawCircle(int radius) {
+  if (radius == 0)
+    printPoint(4,4);
+  else
+    // if radius >=0
+}
