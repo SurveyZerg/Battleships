@@ -115,8 +115,72 @@ void printBigXblink(){
 }
 
 void drawCircle(int radius) {
-  if (radius == 0)
+  if (radius == 0) {
+    printPoint(3,3);
+    printPoint(3,4);
     printPoint(4,4);
-  else
-    // if radius >=0
+    printPoint(4,3);
+  }
+  if (radius==1){
+      drawCircle(0);
+      delay(300);
+      printPoint(3,2);
+      printPoint(4,2);
+      printPoint(2,3);
+      printPoint(2,4);
+      printPoint(3,6);
+      printPoint(4,6);
+      printPoint(5,3);
+      printPoint(5,4);
+  }
+  if (radius==2){
+      printPoint(3,1);
+      printPoint(4,1);
+      printPoint(2,2);
+      printPoint(1,3);
+      printPoint(1,4);
+      printPoint(2,5);
+      printPoint(3,6);
+      printPoint(4,6);
+      printPoint(5,5);
+      printPoint(6,3);
+      printPoint(6,4);
+      printPoint(5,2);
+  }
+  if (radius==3) {
+    printPoint(3,0);
+    printPoint(4,0);
+    printPoint(2,1);
+    printPoint(1,2);
+    printPoint(0,3);
+    printPoint(0,4);
+    printPoint(1,5);
+    printPoint(2,6);
+    printPoint(3,7);
+    printPoint(4,7);
+    printPoint(5,6);
+    printPoint(6,5);
+    printPoint(7,3);
+    printPoint(7,4);
+    printPoint(6,2);
+    printPoint(5,1);
+  }
+  if (radius==4) {
+    printPoint(3,0);
+    printPoint(4,0);
+    printPoint(2,1);
+    printPoint(1,2);
+    printPoint(0,3);
+    printPoint(0,4);
+    printPoint(1,5);
+    printPoint(2,6);
+    printPoint(3,7);
+    printPoint(4,7);
+    printPoint(5,6);
+    printPoint(6,5);
+    printPoint(7,3);
+    printPoint(7,4);
+    printPoint(6,2);
+    printPoint(5,1);
+  }
 }
