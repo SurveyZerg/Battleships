@@ -36,9 +36,6 @@ void resetMatrix(void)
 }
 
 
-
-
-
 void setup() {
   mx.begin();
   resetMatrix();
@@ -69,6 +66,6 @@ void loop() {
       blinkingPoint(0,i);
       delay(100);
    }*/
-   blinkingPoint(voltage,voltage2);
+   blinkingPoint(voltage,voltage2); // Blinks when user chooses the location with Potentiometer
 
 }
