@@ -4,7 +4,7 @@
 
 Ship_x3::Ship_x3()
 {
-	Set_amount_of_ships(1);
+	Set_amount_of_ships(AMOUNT_OF_X3_SHIPS);
 	Set_size_of_ship(3);
 }
 int Ship_x3::Get_amount_of_ships()

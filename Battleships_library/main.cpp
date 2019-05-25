@@ -1,13 +1,11 @@
 //main.cpp
 
 #include "battleships_library.h"
+#include <iostream>
 
 int main()
 {
-	Map map;
-	Player player1;
-	Player player2;
-
+	Game battleships;
 	system("pause");
 	return 0;
 }

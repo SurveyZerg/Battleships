@@ -3,6 +3,11 @@
 
 #include <vector>
 
+#define AMOUNT_OF_X1_SHIPS 3
+#define AMOUNT_OF_X2_SHIPS 2
+#define AMOUNT_OF_X3_SHIPS 1
+#define AMOUNT_OF_X4_SHIPS 0
+
 class Ship
 {
 private:

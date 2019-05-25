@@ -125,6 +125,7 @@
     <ClInclude Include="ship_x4.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="battleships_library.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="player.cpp" />
@@ -132,6 +133,7 @@
     <ClCompile Include="ship_x1.cpp" />
     <ClCompile Include="ship_x2.cpp" />
     <ClCompile Include="ship_x3.cpp" />
+    <ClCompile Include="ship_x4.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
