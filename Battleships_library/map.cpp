@@ -5,16 +5,17 @@
 
 Map::Map()
 {
-	for (int i = 0; i < LENGTH; i++)
+	ship_on_map.resize(8, std::vector<Ship*>(8));
+	for (int Line = 0; Line < HEIGHT; Line++)
 	{
-		for (int j = 0; j < HEIGHT; j++)
+		for (int Column = 0; Column < LENGTH; Column++)
 		{
-			ship_on_map[i][j] = NULL;
+			ship_on_map[Line][Column] = NULL;
 		}
 	}
 }
 
-void Map::Set_ship(Ship &ship, int Ox, int Oy, bool vertically) /*Нужно, чтобы игрок сначала просто выбирал точку с подсвечивающимся кораблем и была кнопка у него на вертикально
+void Map::Set_ship(Ship &ship, int Line, int Column, bool vertically) /*Нужно, чтобы игрок сначала просто выбирал точку с подсвечивающимся кораблем и была кнопка у него на вертикально
 																или горизонтально. Когда он выберет нужное место и нажмет кнопку установить корабль, то считываются настоящее положение
 																кнопки вертикально\горизонтально, а также выбранная точка, параметры передаются в этот метод и все готово*/
 {
@@ -34,43 +35,41 @@ void Map::Set_ship(Ship &ship, int Ox, int Oy, bool vertically) /*Нужно, чтобы и
 		}
 	}
 	*/
-
 	//Установка корабля на карту, проверяя границы поля
 	if (vertically == false)
 	{
-		int a = 0; //счетчик, чтобы правильно поставить корабль, когда только часть выходит за пределы
+		int a = -1; //счетчик, чтобы правильно поставить корабль, когда только часть выходит за пределы
 		for (int i = 0;i < ship.Get_size_of_ship(); i++)
 		{
-			if (Ox + i <= LENGTH)
+			if (Column + i < LENGTH)
 			{
-				ship_on_map[Ox - 1 + i][Oy - 1] = &ship;
+				ship_on_map[Line][Column + i] = &ship;
 				a++;
 			}
-			else if (Ox + i > LENGTH)
+			else if (Column + i >= LENGTH)
 			{
-				ship_on_map[Ox - 1 - i + a][Oy - 1] = &ship;
+				ship_on_map[Line][Column - i + a] = &ship;
 			}
 		}
 	}
 	else if (vertically == true)
 	{
-		int a = 0; //счетчик, чтобы правильно поставить корабль, когда только часть выходит за пределы
+		int a = -1; //счетчик, чтобы правильно поставить корабль, когда только часть выходит за пределы
 		for (int i = 0; i < ship.Get_size_of_ship(); i++)
 		{
-			if (Oy + i <= HEIGHT)
+			if (Line + i < HEIGHT)
 			{
-				ship_on_map[Ox - 1][Oy - 1 + i] = &ship;
+				ship_on_map[Line + i][Column] = &ship;
 				a++;
 			}
-			else if (Oy + i > HEIGHT)
+			else if (Line + i >= HEIGHT)
 			{
-				ship_on_map[Ox - 1][Oy - 1 - i + a] = &ship;
+				ship_on_map[Line - i + a][Column] = &ship;
 			}
 		}
 	}
-
 }
-Ship* Map::Get_ship(int Ox, int Oy)
+Ship* Map::Get_ship(int Line, int Column)
 {
-	return ship_on_map[Ox - 1][Oy - 1];
+	return ship_on_map[Line][Column];
 }

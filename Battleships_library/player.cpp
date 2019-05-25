@@ -3,22 +3,24 @@
 #include <iostream>
 #include "player.h"
 
-void  Player::Set_ship(Ship &ship, int Ox, int Oy, bool vertically)
+void  Player::Set_ship(Ship &ship, int Line, int Column, bool vertically)
 {
-	this->map.Set_ship(ship, Ox, Oy,vertically);
+	this->map.Set_ship(ship, Line, Column, vertically);
 }
-Ship* Player::Get_ship(int Ox, int Oy)
+Ship* Player::Get_ship(int Line, int Column)
 {
-	return this->map.Get_ship(Ox, Oy);
+	return this->map.Get_ship(Line, Column);
 }
+
+//ниже точно все работает правильно
 
 void Player::show_map() // акое-то смещение всей карты
 {
-	for (int i = 0; i < LENGTH; i++)
+	for (int Line = 0; Line < HEIGHT; Line++)
 	{
-		for (int j = 0; j < HEIGHT; j++)
+		for (int Column = 0; Column < LENGTH; Column++)
 		{
-			if (this->Get_ship(i + 1, j + 1))
+			if (map.ship_on_map[Line][Column])
 			{
 				std::cout << "| ";
 			}
@@ -33,11 +35,12 @@ void Player::show_map() // акое-то смещение всей карты
 
 void Player::show_ships()
 {
-	for (int j = 1; j < 9; j++)
+	for (int Line = 0; Line < HEIGHT; Line++)
 	{
-		for (int i = 1; i < 9; i++)
+		for (int Column = 0; Column < LENGTH; Column++)
 		{
-			std::cout << map.Get_ship(j, i) << std::endl;
+			std::cout << map.ship_on_map[Line][Column];
+			std::cout << std::endl;
 		}
 		std::cout << std::endl;
 	}

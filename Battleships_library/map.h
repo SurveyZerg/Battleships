@@ -6,6 +6,8 @@
 #include "ship_x3.h"
 #include "ship_x4.h"
 
+#include <vector>
+
 #define LENGTH 8
 #define HEIGHT 8
 
@@ -18,9 +20,9 @@ protected:
 public:
 	Map();
 
-	Ship* ship_on_map[LENGTH - 1][HEIGHT - 1]; // 8 по оси x и 8 по оси y
+	std::vector <std::vector <Ship*>> ship_on_map; // 8 по оси x и 8 по оси y
 
-	void Set_ship(Ship &ship, int Ox, int Oy,bool vertically = false);
+	void Set_ship(Ship &ship, int Line, int Column,bool vertically = false);
 
-	Ship* Get_ship(int Ox, int Oy);
+	Ship* Get_ship(int Line, int Column);
 };
