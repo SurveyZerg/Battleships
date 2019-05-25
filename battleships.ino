@@ -57,6 +57,8 @@ void loop() {
   int voltage2 = sensorValue2 * (8 / 1023.0);
   Serial.println(voltage2);
   
+  PRINTS("Hello"); // Does it work??????????????
+  
   //printBigX();
   //delay(1000);
   //printBigXblink();
