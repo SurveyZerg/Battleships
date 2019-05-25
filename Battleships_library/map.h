@@ -20,9 +20,12 @@ protected:
 public:
 	Map();
 
-	std::vector <std::vector <Ship*>> ship_on_map; // 8 по оси x и 8 по оси y
+	std::vector <std::vector <Ship*>> ship_on_map; // 8 ГЇГ® Г®Г±ГЁ x ГЁ 8 ГЇГ® Г®Г±ГЁ y
 
 	void Set_ship(Ship &ship, int Line, int Column,bool vertically = false);
 
 	Ship* Get_ship(int Line, int Column);
+	
+	bool checkAround ( int x, int y );
+ 	bool checkAvailability( int x, int y );
 };
