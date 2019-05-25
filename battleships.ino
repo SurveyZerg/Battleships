@@ -69,5 +69,10 @@ void loop() {
       delay(100);
    }*/
    blinkingPoint(voltage,voltage2); // Blinks when user chooses the location with Potentiometer
+  
+   if (checkAround(voltage,voltage2))
+     // We cannot put new ships here
+   else
+     // Put the ship here if user knocked the button
 
 }
