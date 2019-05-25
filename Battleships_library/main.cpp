@@ -6,6 +6,7 @@
 int main()
 {
 	Game battleships;
+	
 	system("pause");
 	return 0;
 }

@@ -20,12 +20,10 @@ protected:
 public:
 	Map();
 
-	std::vector <std::vector <Ship*>> ship_on_map; // 8 ïî îñè x è 8 ïî îñè y
+	std::vector <std::vector <Ship*>> ship_on_map;
 
 	void Set_ship(Ship &ship, int Line, int Column,bool vertically = false);
 
 	Ship* Get_ship(int Line, int Column);
-	
-	bool checkAround ( int x, int y );
- 	bool checkAvailability( int x, int y );
+
 };

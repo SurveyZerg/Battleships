@@ -3,7 +3,7 @@
 
 #include "map.h"
 
-class Player //Опасно, скорее всего неправильно
+class Player
 {
 private:
 	Map map;
@@ -13,4 +13,7 @@ public:
 
 	void show_map();
 	void show_ships();
+
+	bool checkAround(int x, int y);
+	bool checkAvailability(int x, int y);
 };

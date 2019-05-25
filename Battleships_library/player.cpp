@@ -12,9 +12,7 @@ Ship* Player::Get_ship(int Line, int Column)
 	return this->map.Get_ship(Line, Column);
 }
 
-//ниже точно все работает правильно
-
-void Player::show_map() //Какое-то смещение всей карты
+void Player::show_map() 
 {
 	for (int Line = 0; Line < HEIGHT; Line++)
 	{
@@ -44,4 +42,24 @@ void Player::show_ships()
 		}
 		std::cout << std::endl;
 	}
+}
+
+bool Player::checkAround(int x, int y) {
+	bool thereIsShip = 0;
+	for (int i = -1; i < 2; ++i)
+		thereIsShip += checkAvailability(x + i, y - 1);
+	for (int i = -1; i < 2; ++i)
+		thereIsShip += checkAvailability(x + i, y + 1);
+	thereIsShip += checkAvailability(x + 1, y);
+	thereIsShip += checkAvailability(x - 1, y);
+	return thereIsShip;
+}
+
+bool Player::checkAvailability(int x, int y) {
+	if (x < 0 || x>7 || y < 0 || y>7) // we cannot check there
+		return 0;
+	if (this->Get_ship(x,y) == 0)
+		return 0;  // means this is free of ships
+	else
+		return 1;
 }
