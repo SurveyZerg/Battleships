@@ -17,5 +17,8 @@ protected:
 public:
 	Map();
 
-	Ship* map[length - 1][height - 1]; // 8 по оси x и 8 по оси y
+	Ship* map[length - 1][height - 1]; // 8 ДЏГ® Г®Е„ДЌ x ДЌ 8 ДЏГ® Г®Е„ДЌ y
+	
+	bool checkAround ( int x, int y );
+ 	bool checkAvailability( int x, int y );
 };
