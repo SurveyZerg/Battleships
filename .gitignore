@@ -16,8 +16,6 @@ Battleships library/.vs/Battleships library/v15/.suo
 *.pdb
 Battleships_library/.vs/Battleships library/v15/.suo
 
-Ships.xcodeproj
-.DS_Store
-Makefile
 Ships
-ships
+.DS_Store
+Ships
