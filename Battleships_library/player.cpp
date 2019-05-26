@@ -63,3 +63,21 @@ bool Player::checkAvailability(int x, int y) {
 	else
 		return 1;
 }
+
+void Player::destroyShip(Player* enemy, int Line, int Column)
+{
+	enemy->map.ship_on_map[Line][Column] = NULL;
+}
+
+bool Player::shoot(Player* enemy, int Line, int Column)
+{
+	if (enemy->Get_ship(Line, Column))
+	{
+		this->destroyShip(enemy, Line, Column);
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
