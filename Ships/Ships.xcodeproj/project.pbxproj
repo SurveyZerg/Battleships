@@ -1,0 +1,78 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXFileReference section */
+		5C7BF1B0229AD721003EDE4C /* Battleships_library */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Battleships_library; path = ../Battleships_library; sourceTree = "<group>"; };
+		5C7BF1B1229AD721003EDE4C /* battleships.ino */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; name = battleships.ino; path = ../battleships.ino; sourceTree = "<group>"; };
+		5C7BF1B2229AD721003EDE4C /* drawBattleships.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = drawBattleships.h; path = ../drawBattleships.h; sourceTree = "<group>"; };
+		5C7BF1B3229AD721003EDE4C /* test */ = {isa = PBXFileReference; lastKnownFileType = folder; name = test; path = ../test; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		5C7BF1A9229AD6F6003EDE4C = {
+			isa = PBXGroup;
+			children = (
+				5C7BF1B0229AD721003EDE4C /* Battleships_library */,
+				5C7BF1B1229AD721003EDE4C /* battleships.ino */,
+				5C7BF1B2229AD721003EDE4C /* drawBattleships.h */,
+				5C7BF1B3229AD721003EDE4C /* test */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		5C7BF1AA229AD6F6003EDE4C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1010;
+			};
+			buildConfigurationList = 5C7BF1AD229AD6F6003EDE4C /* Build configuration list for PBXProject "Ships" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 5C7BF1A9229AD6F6003EDE4C;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		5C7BF1AE229AD6F6003EDE4C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		5C7BF1AF229AD6F6003EDE4C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5C7BF1AD229AD6F6003EDE4C /* Build configuration list for PBXProject "Ships" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C7BF1AE229AD6F6003EDE4C /* Debug */,
+				5C7BF1AF229AD6F6003EDE4C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5C7BF1AA229AD6F6003EDE4C /* Project object */;
+}

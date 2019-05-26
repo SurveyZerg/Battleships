@@ -12,7 +12,21 @@
 MD_MAX72XX mx = MD_MAX72XX(HARDWARE_TYPE, CS_PIN, MAX_DEVICES);                      // SPI hardware interface
 //MD_MAX72XX mx = MD_MAX72XX(HARDWARE_TYPE, DATA_PIN, CLK_PIN, CS_PIN, MAX_DEVICES); // Arbitrary pins
 
+int readVoltage1() {
+    //Serial.begin(9600);
+    int sensorValue = analogRead(A0);
+    int voltage = sensorValue * (8 / 1023.0);
+    return voltage;
+    //Serial.println(voltage);
+}
 
+int readVoltage2() {
+    //Serial.begin(9600);
+    int sensorValue2 = analogRead(A1);
+    int voltage2 = sensorValue2 * (8 / 1023.0);
+    return voltage2;
+    //Serial.println(voltage2);
+}
 
 void printPoint(int x, int y) {
    mx.setPoint(x,y, true);

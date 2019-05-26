@@ -25,6 +25,9 @@
 #define DATA_PIN  11  // or MOSI
 #define CS_PIN    10  // or SS
 
+#define Button1_PIN 7
+#define Button2_PIN 8
+
 MD_MAX72XX mx = MD_MAX72XX(HARDWARE_TYPE, CS_PIN, MAX_DEVICES);                      // SPI hardware interface
 //MD_MAX72XX mx = MD_MAX72XX(HARDWARE_TYPE, DATA_PIN, CLK_PIN, CS_PIN, MAX_DEVICES); // Arbitrary pins
 
@@ -37,42 +40,70 @@ void resetMatrix(void)
 
 
 void setup() {
-  mx.begin();
-  resetMatrix();
-  #if DEBUG
-  Serial.begin(57600);
-  #endif
-  
-  Serial.begin(9600);
+    mx.begin();
+    resetMatrix();
+    #if DEBUG
+    Serial.begin(57600);
+    #endif
+    Serial.begin(9600);
+    
+    // Can do illustration if some map here to show that it is a "Battleships" game
+    blinkingPoint(readVoltage1(), readVoltage2());
+    
+    Game battleships;
+
 }
 
 
 void loop() {
   
-  int sensorValue = analogRead(A0);
-  int voltage = sensorValue * (8 / 1023.0);
-  Serial.println(voltage);
+    PRINTS("Hello"); // Does it work??????????????
   
-  int sensorValue2 = analogRead(A1);
-  int voltage2 = sensorValue2 * (8 / 1023.0);
-  Serial.println(voltage2);
-  
-  PRINTS("Hello"); // Does it work??????????????
-  
-  //printBigX();
-  //delay(1000);
-  //printBigXblink();
-  //delay(100);
-   //mx.clear();
-   /*for (int i=0;i<8;++i) {
-      blinkingPoint(0,i);
-      delay(100);
-   }*/
-   blinkingPoint(voltage,voltage2); // Blinks when user chooses the location with Potentiometer
-  
-   if (checkAround(voltage,voltage2))
-     // We cannot put new ships here
-   else
-     // Put the ship here if user knocked the button
+    bool buttonON = digitalRead(Button1_PIN);
+    bool button2ON = digitalRead(Button2_PIN);
+    bool orientation = 1; // 1 means vertically; 0 means horisontally
+    
+    bool User = 0; // 0 means User1; 1 means User2
+    
+    int shipsCounter = 0;
+    
+    while (!buttonON) {
+        blinkingPoint(readVoltage1(), readVoltage2()); // Blinks when user chooses the location with Potentiometer
+    }
+    if (button2ON)
+        orientation = !orientation;
+    if (buttonON) {
+        if (checkAround( readVoltage1(), readVoltage2() )) {
+            // We cannot put new ships here
+            break;
+        }
+        else {
+            // Put the ship here if user knocked the button
+            // where to get shipPtr ??????
+            map1.Set_ship(shipPtr, readVoltage1(), readVoltage2(), orientation);
+            ++shipsCounter;
+            User = !User;
+        }
+    }
+    if (shipsCounter == 12)
+        // The game should begin here
+       
 
 }
+
+
+if (checkAround( readVoltage1(), readVoltage2() ))
+// We cannot put new ships here
+else
+// Put the ship here if user knocked the button
+
+//printBigX();
+//delay(1000);
+//printBigXblink();
+//delay(100);
+//mx.clear();
+/*for (int i=0;i<8;++i) {
+ blinkingPoint(0,i);
+ delay(100);
+ }*/
+
