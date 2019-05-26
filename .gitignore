@@ -18,3 +18,5 @@ Battleships library/.vs/Battleships library/v15/.suo
 
 Ships.xcodeproj
 .DS_Store
+Makefile
+ships
