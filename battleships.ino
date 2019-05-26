@@ -1,7 +1,7 @@
 #include <MD_MAX72xx.h>
 #include <SPI.h>
 
-#include <drawBattleships.h>
+#include <battleships.h>
 
 #define DEBUG 0
 
@@ -68,7 +68,7 @@ void loop() {
     buttonON = digitalRead(Button1_PIN);
     button2ON = digitalRead(Button2_PIN);
     
-    
+    // Setting ships ------------------------------------------------------------------------------------
     while (!buttonON) {
         blinkingPoint(readVoltage1(), readVoltage2()); // Blinks when player chooses the location with Potentiometer
     }
@@ -84,7 +84,7 @@ void loop() {
         else {
             // Put the ship here if player knocked the button
             // where to get shipPtr ??????
-            getPlayer()->map.Set_ship(shipPtr, readVoltage1(), readVoltage2(), orientation);
+            getPlayer()->map.Set_ship(shipPtr????????, readVoltage1(), readVoltage2(), orientation);
             ++shipsCounter;
             if (shipsCounter == 2 || shipsCounter == 6)
                 --currentShipSize;
@@ -92,6 +92,7 @@ void loop() {
         }
     }
     
+    // Starting game ------------------------------------------------------------------------------------
     if (shipsCounter == 12)
         // The game should begin here
        
