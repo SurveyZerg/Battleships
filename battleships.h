@@ -28,6 +28,13 @@ int readVoltage2() {
     //Serial.println(voltage2);
 }
 
+Player* getPlayer(bool Player) {
+    if (!Player)      //means that it is player1
+        return player1;
+    else            //means that it is player2
+        return player2;
+}
+
 void printPoint(int x, int y) {
    mx.setPoint(x,y, true);
 }
@@ -69,6 +76,13 @@ void printBigXblink() {
       printPoint(i,7-i);
       delay(random(100));
   }
+}
+
+void drawBoom(){
+    for (int i=0;i<8;++i) {
+        drawCircle(i);
+        delay(300); // Maybe must put bigger delay
+    }
 }
 
 void drawCircle(int radius) {
@@ -167,12 +181,5 @@ void drawCircle(int radius) {
     printPoint(0,7);
     printPoint(7,7);
     printPoint(7,0);
-  }
-}
-
-void drawBoom(){
-  for (int i=0;i<8;++i) {
-    drawCircle(i);
-    delay(300); // Maybe must put bigger delay
   }
 }

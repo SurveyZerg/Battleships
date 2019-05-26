@@ -51,40 +51,47 @@ void setup() {
     blinkingPoint(readVoltage1(), readVoltage2());
     
     Game battleships;
-
+    
+    bool orientation = 1; // 1 means vertically; 0 means horisontally
+    bool Player = 0; // 0 means player1; 1 means player2
+    int shipsCounter = 0;
+    int currentShipSize = 3;
+    bool buttonON = 0;
+    bool button2ON = 0;
 }
 
 
 void loop() {
   
-    PRINTS("Hello"); // Does it work??????????????
+    //PRINTS("Hello"); // Does it work??????????????
   
-    bool buttonON = digitalRead(Button1_PIN);
-    bool button2ON = digitalRead(Button2_PIN);
-    bool orientation = 1; // 1 means vertically; 0 means horisontally
+    buttonON = digitalRead(Button1_PIN);
+    button2ON = digitalRead(Button2_PIN);
     
-    bool User = 0; // 0 means User1; 1 means User2
-    
-    int shipsCounter = 0;
     
     while (!buttonON) {
-        blinkingPoint(readVoltage1(), readVoltage2()); // Blinks when user chooses the location with Potentiometer
+        blinkingPoint(readVoltage1(), readVoltage2()); // Blinks when player chooses the location with Potentiometer
     }
+    
     if (button2ON)
         orientation = !orientation;
+    
     if (buttonON) {
-        if (checkAround( readVoltage1(), readVoltage2() )) {
+        if (getPlayer()->checkAroundShip( readVoltage1(), readVoltage2(), currentShipSize, orientation)) {
             // We cannot put new ships here
-            break;
+            //break;
         }
         else {
-            // Put the ship here if user knocked the button
+            // Put the ship here if player knocked the button
             // where to get shipPtr ??????
-            map1.Set_ship(shipPtr, readVoltage1(), readVoltage2(), orientation);
+            getPlayer()->map.Set_ship(shipPtr, readVoltage1(), readVoltage2(), orientation);
             ++shipsCounter;
-            User = !User;
+            if (shipsCounter == 2 || shipsCounter == 6)
+                --currentShipSize;
+            Player = !Player;
         }
     }
+    
     if (shipsCounter == 12)
         // The game should begin here
        
@@ -92,10 +99,10 @@ void loop() {
 }
 
 
-if (checkAround( readVoltage1(), readVoltage2() ))
-// We cannot put new ships here
-else
-// Put the ship here if user knocked the button
+
+
+
+
 
 //printBigX();
 //delay(1000);

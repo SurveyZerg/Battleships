@@ -44,6 +44,19 @@ void Player::show_ships()
 	}
 }
 
+bool Player::checkAroundShip ( int x, int y, int shipSize, bool orientation ) {
+    bool checkStatus=0;
+    if (orientation) {  // vertical orientation
+        for (int i=y; i<i+shipSize; ++i)
+            checkStatus += this->checkAround(x,i);
+    }
+    else {              // horisontal orientation
+        for (int i=x; i<i+shipSize; ++i)
+            checkStatus += this->checkAround(i,y);
+    }
+    return checkStatus;
+}
+
 bool Player::checkAround(int x, int y) {
 	bool thereIsShip = 0;
 	for (int i = -1; i < 2; ++i)
