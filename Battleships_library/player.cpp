@@ -1,8 +1,8 @@
 //player.cpp
 
-#include <iostream>
+//#include <iostream>
 #include "player.h"
-#include "battleships.h"
+//#include "battleships.h"
 
 
 void  Player::Set_ship(Ship &ship, int Line, int Column, bool vertically)
@@ -14,26 +14,26 @@ Ship* Player::Get_ship(int Line, int Column)
 	return this->map.Get_ship(Line, Column);
 }
 
-void Player::show_map() 
+/*void show_map(Player player)
 {
 	for (int Line = 0; Line < HEIGHT; Line++)
 	{
 		for (int Column = 0; Column < LENGTH; Column++)
 		{
-			if (map.ship_on_map[Line][Column])
+			if (player.map.ship_on_map[Line][Column])
 			{
 				//std::cout << "| ";
-                printPoint(Line, Column);
+				printPoint(Line, Column);
 			}
 			else
 			{
 				//std::cout << "- ";
-                clearPoint(Line, Column);
+				clearPoint(Line, Column);
 			}
 		}
 		//std::cout << std::endl;
 	}
-}
+}*/
 
 void Player::show_ships()
 {
@@ -41,22 +41,22 @@ void Player::show_ships()
 	{
 		for (int Column = 0; Column < LENGTH; Column++)
 		{
-			std::cout << map.ship_on_map[Line][Column];
-			std::cout << std::endl;
+			//std::cout << map.ship_on_map[Line][Column];
+			//std::cout << std::endl;
 		}
-		std::cout << std::endl;
+		//std::cout << std::endl;
 	}
 }
 
 bool Player::checkAroundShip ( int x, int y, int shipSize, bool orientation ) {
     bool checkStatus=0;
     if (orientation) {  // vertical orientation
-        for (int i=y; i<i+shipSize; ++i)
-            checkStatus += this->checkAround(x,i);
+        for (int i=0; i<shipSize; ++i)
+            checkStatus += this->checkAround(x,y+i);
     }
     else {              // horisontal orientation
-        for (int i=x; i<i+shipSize; ++i)
-            checkStatus += this->checkAround(i,y);
+        for (int i=0; i<shipSize; ++i)
+            checkStatus += this->checkAround(x+i,y);
     }
     return checkStatus;
 }

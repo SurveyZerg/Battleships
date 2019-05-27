@@ -1,7 +1,6 @@
 // Library for Battleships for drawing different things
 
 #include <MD_MAX72xx.h>
-#include 
 #include <SPI.h>
 
 #define HARDWARE_TYPE MD_MAX72XX::PAROLA_HW

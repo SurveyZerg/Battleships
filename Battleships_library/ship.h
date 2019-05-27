@@ -17,7 +17,7 @@ protected:
 	int amount_of_ships;
 
 public:
-    Ship (int shipSize) {Set_size_of_ship(shipSize);}
+    //Ship (int shipSize) {Set_size_of_ship(shipSize);}
     
 	int Get_size_of_ship();
 	void Set_size_of_ship(int size_of_ship);
