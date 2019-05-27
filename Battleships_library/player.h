@@ -16,6 +16,7 @@ public:
 	void show_map();
 	void show_ships();
 
+    bool checkAroundShip ( int x, int y, int shipSize, bool orientation ) {
 	bool checkAround(int x, int y);
 	bool checkAvailability(int x, int y);
 

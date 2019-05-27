@@ -15,3 +15,6 @@ Battleships library/.vs/Battleships library/v15/.suo
 *.log
 *.pdb
 Battleships_library/.vs/Battleships library/v15/.suo
+
+Ships/*
+.DS_Store

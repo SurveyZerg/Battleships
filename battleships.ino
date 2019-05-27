@@ -1,7 +1,7 @@
 #include <MD_MAX72xx.h>
 #include <SPI.h>
 
-#include <drawBattleships.h>
+//#include <battleships.h>
 
 #define DEBUG 0
 
@@ -25,6 +25,9 @@
 #define DATA_PIN  11  // or MOSI
 #define CS_PIN    10  // or SS
 
+#define Button1_PIN 7
+#define Button2_PIN 8
+
 MD_MAX72XX mx = MD_MAX72XX(HARDWARE_TYPE, CS_PIN, MAX_DEVICES);                      // SPI hardware interface
 //MD_MAX72XX mx = MD_MAX72XX(HARDWARE_TYPE, DATA_PIN, CLK_PIN, CS_PIN, MAX_DEVICES); // Arbitrary pins
 
@@ -37,42 +40,88 @@ void resetMatrix(void)
 
 
 void setup() {
-  mx.begin();
-  resetMatrix();
-  #if DEBUG
-  Serial.begin(57600);
-  #endif
-  
-  Serial.begin(9600);
+    mx.begin();
+    resetMatrix();
+    #if DEBUG
+    Serial.begin(57600);
+    #endif
+    Serial.begin(9600);
+    
+    // Can do illustration of some default map here to show that it is a "Battleships" game
+    
+    //blinkingPoint(readVoltage1(), readVoltage2());
+    
+    Game battleships;
+    
+    bool orientation = 1; // 1 means vertically; 0 means horisontally
+    bool Player = 0; // 0 means player1; 1 means player2
+    drawPlayer(Player);
+    int shipsCounter = 0;
+    int currentShipSize = 3;
+    bool buttonON = 0;
+    bool button2ON = 0;
 }
 
 
 void loop() {
   
-  int sensorValue = analogRead(A0);
-  int voltage = sensorValue * (8 / 1023.0);
-  Serial.println(voltage);
+    //PRINTS("Hello"); // Does it work??????????????
   
-  int sensorValue2 = analogRead(A1);
-  int voltage2 = sensorValue2 * (8 / 1023.0);
-  Serial.println(voltage2);
-  
-  PRINTS("Hello"); // Does it work??????????????
-  
-  //printBigX();
-  //delay(1000);
-  //printBigXblink();
-  //delay(100);
-   //mx.clear();
-   /*for (int i=0;i<8;++i) {
-      blinkingPoint(0,i);
-      delay(100);
-   }*/
-   blinkingPoint(voltage,voltage2); // Blinks when user chooses the location with Potentiometer
-  
-   if (checkAround(voltage,voltage2))
-     // We cannot put new ships here
-   else
-     // Put the ship here if user knocked the button
+    buttonON = digitalRead(Button1_PIN);
+    button2ON = digitalRead(Button2_PIN);
+    
+    // Setting ships ------------------------------------------------------------------------------------
+    while (!buttonON) {
+        //blinkingPoint(readVoltage1(), readVoltage2());
+        blinkingShip(readVoltage1(), readVoltage2(), currentShipSize, orientation);
+        //getPlayer()->show_map();
+    }
+    
+    if (button2ON)
+        orientation = !orientation;
+    
+    if (buttonON) {
+        // Put the ship here if player knocked the button
+        if (getPlayer()->checkAroundShip( readVoltage1(), readVoltage2(), currentShipSize, orientation)) {
+            // We cannot put new ships here
+            //break;
+            resetMatrix();
+            drawPlayer(Player); //???
+            getPlayer()->show_map();
+        }
+        else {
+            Ship* newShip = new Ship(currentShipSize); // May be PROBLEM here !!!!! check!!!!!
+            getPlayer()->Set_ship(newShip, readVoltage1(), readVoltage2(), orientation);
+            ++shipsCounter;
+            if (shipsCounter == 2 || shipsCounter == 6)
+                --currentShipSize;
+            Player = !Player;
+            resetMatrix();
+            drawPlayer(Player);
+            getPlayer()->show_map();
+        }
+    }
+    
+    // Starting game ------------------------------------------------------------------------------------
+    if (shipsCounter == 12) {
+        // The game should begin here
+        
+    }
 
 }
+
+
+
+
+
+
+//printBigX();
+//delay(1000);
+//printBigXblink();
+//delay(100);
+//mx.clear();
+/*for (int i=0;i<8;++i) {
+ blinkingPoint(0,i);
+ delay(100);
+ }*/
+

@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include "player.h"
+#include "battleships.h"
+
 
 void  Player::Set_ship(Ship &ship, int Line, int Column, bool vertically)
 {
@@ -20,14 +22,16 @@ void Player::show_map()
 		{
 			if (map.ship_on_map[Line][Column])
 			{
-				std::cout << "| ";
+				//std::cout << "| ";
+                printPoint(Line, Column);
 			}
 			else
 			{
-				std::cout << "- ";
+				//std::cout << "- ";
+                clearPoint(Line, Column);
 			}
 		}
-		std::cout << std::endl;
+		//std::cout << std::endl;
 	}
 }
 
@@ -42,6 +46,19 @@ void Player::show_ships()
 		}
 		std::cout << std::endl;
 	}
+}
+
+bool Player::checkAroundShip ( int x, int y, int shipSize, bool orientation ) {
+    bool checkStatus=0;
+    if (orientation) {  // vertical orientation
+        for (int i=y; i<i+shipSize; ++i)
+            checkStatus += this->checkAround(x,i);
+    }
+    else {              // horisontal orientation
+        for (int i=x; i<i+shipSize; ++i)
+            checkStatus += this->checkAround(i,y);
+    }
+    return checkStatus;
 }
 
 bool Player::checkAround(int x, int y) {

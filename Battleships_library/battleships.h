@@ -12,7 +12,28 @@
 MD_MAX72XX mx = MD_MAX72XX(HARDWARE_TYPE, CS_PIN, MAX_DEVICES);                      // SPI hardware interface
 //MD_MAX72XX mx = MD_MAX72XX(HARDWARE_TYPE, DATA_PIN, CLK_PIN, CS_PIN, MAX_DEVICES); // Arbitrary pins
 
+int readVoltage1() {
+    //Serial.begin(9600);
+    int sensorValue = analogRead(A0);
+    int voltage = sensorValue * (8 / 1023.0);
+    return voltage;
+    //Serial.println(voltage);
+}
 
+int readVoltage2() {
+    //Serial.begin(9600);
+    int sensorValue2 = analogRead(A1);
+    int voltage2 = sensorValue2 * (8 / 1023.0);
+    return voltage2;
+    //Serial.println(voltage2);
+}
+
+Player* getPlayer(bool Player) {
+    if (!Player)      //means that it is player1
+        return player1;
+    else            //means that it is player2
+        return player2;
+}
 
 void printPoint(int x, int y) {
    mx.setPoint(x,y, true);
@@ -22,21 +43,41 @@ void clearPoint(int x, int y) {
   mx.setPoint(x,y, false);
 }
 
-void blinkingPoint(int x,int y) {
-  mx.setPoint(x,y, true);
+void blinkingPoint(int x,int y) { // Blinks when player chooses the location with Potentiometer
+  printPoint(x,y);
   delay(100);
-  mx.setPoint(x,y, false);
+  clearPoint(x,y);
   delay(100);
 }
 
-void printRow(int x ) {
-  for(int i=0; i<8;++i) 
-      printPoint(x,i);
+void blinkingShip(int x, int y, int shipSize, bool orientation) {
+    if (orientation) {  // vertical orientation
+        for (int i=y; i<i+shipSize; ++i)
+            printPoint(x,i);
+        delay(100);
+        for (int i=y; i<i+shipSize; ++i)
+            clearPoint(x,i);
+        delay(100);
+    }
+    else {              // horisontal orientation
+        for (int i=x; i<i+shipSize; ++i)
+            printPoint(i,y);
+        delay(100);
+        for (int i=x; i<i+shipSize; ++i)
+            clearPoint(i,y);
+        delay(100);
+    }
 }
 
-void printColumn(int y) {
+
+void printRow(int y ) {
   for(int i=0; i<8;++i) 
       printPoint(i,y);
+}
+
+void printColumn(int x) {
+  for(int i=0; i<8;++i) 
+      printPoint(x,i);
 }
 
 void printBigX() {
@@ -55,6 +96,48 @@ void printBigXblink() {
       printPoint(i,7-i);
       delay(random(100));
   }
+}
+
+void drawPlayer(bool Player) {
+    if(!Player) {
+        drawNumber1();
+        delay(700);
+    }
+    else {
+        drawNumber2();
+        delay(700);
+    }
+}
+
+void drawNumber1() {
+    printPoint(2,3);
+    printPoint(3,2);
+    printPoint(4,1);
+    printColumn(5);
+}
+
+void drawNumber2() {
+    printPoint(2,2);
+    printPoint(3,1);
+    printPoint(4,0);
+    printPoint(5,1);
+    printPoint(6,2);
+    printPoint(5,3);
+    printPoint(4,4);
+    printPoint(3,5);
+    printPoint(2,6);
+    printPoint(1,7);
+    printPoint(2,7);
+    printPoint(3,7);
+    printPoint(4,7);
+    printPoint(5,7);
+}
+
+void drawBoom(){
+    for (int i=0;i<8;++i) {
+        drawCircle(i);
+        delay(300); // Maybe must put bigger delay
+    }
 }
 
 void drawCircle(int radius) {
@@ -153,12 +236,5 @@ void drawCircle(int radius) {
     printPoint(0,7);
     printPoint(7,7);
     printPoint(7,0);
-  }
-}
-
-void drawBoom(){
-  for (int i=0;i<8;++i) {
-    drawCircle(i);
-    delay(300); // Maybe must put bigger delay
   }
 }
