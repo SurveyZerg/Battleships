@@ -23,6 +23,7 @@ int main()
 	{
 		if (shoot_finished == false)
 		{
+			std::cout << "Your turn, player #1" << std::endl;
 			A.show_map();
 			std::cout << "Line " << std::endl;
 			std::cin >> potentiometrLine;
@@ -32,13 +33,21 @@ int main()
 			std::cin >> button;
 			if (button == 1)
 			{
-				//Нужно добавить только небольшую временную паузу, чтобы кнопка успела отжаться
-				A.shoot(&B, potentiometrLine - 1, potentiometrColumn - 1);
-				shoot_finished = true;
+				if (A.shoot(&B, potentiometrLine - 1, potentiometrColumn - 1))
+				{
+					std::cout << "NICE SHOOT" << std::endl;
+					shoot_finished = false;
+				}
+				else
+				{
+					std::cout << "HA-HA MISS" << std::endl;
+					shoot_finished = true;
+				}
 			}
 		}
 		if (shoot_finished == true)
 		{
+			std::cout << "Your turn, player #2" << std::endl;
 			B.show_map();
 			std::cout << "Line " << std::endl;
 			std::cin >> potentiometrLine;
@@ -48,9 +57,16 @@ int main()
 			std::cin >> button;
 			if (button == 1)
 			{
-				//Нужно добавить только небольшую временную паузу, чтобы кнопка успела отжаться
-				B.shoot(&A, potentiometrLine - 1, potentiometrColumn - 1);
-				shoot_finished = false;
+				if (B.shoot(&A, potentiometrLine - 1, potentiometrColumn - 1))
+				{
+					std::cout << "NICE SHOOT" << std::endl;
+					shoot_finished = true;
+				}
+				else
+				{
+					std::cout << "HA-HA MISS" << std::endl;
+					shoot_finished = false;
+				}
 			}
 		}
 	}
@@ -66,18 +82,34 @@ int main()
 		{
 			if (button == 1)
 			{
-				//Нужно добавить только небольшую временную паузу, чтобы кнопка успела отжаться
-				A.shoot(&B, potentiometrLine - 1, potentiometrColumn - 1);
-				shoot_finished = true;
+				if (A.shoot(&B, potentiometrLine - 1, potentiometrColumn - 1))
+				{
+					//Думаю, что здесь везде нужны временные паузы, чтобы и кнопка успела отжаться хотя бы
+					//попадание
+					shoot_finished = false;
+				}
+				else
+				{
+					//промах
+					shoot_finished = true;
+				}
 			}
 		}
 		if (shoot_finished == true)
 		{
 			if (button == 1)
 			{
-				//Нужно добавить только небольшую временную паузу, чтобы кнопка успела отжаться
-				A.shoot(&B, potentiometrLine - 1, potentiometrColumn - 1);
-				shoot_finished = false;
+				if (B.shoot(&A, potentiometrLine - 1, potentiometrColumn - 1))
+				{
+					//Думаю, что здесь везде нужны временные паузы, чтобы и кнопка успела отжаться хотя бы
+					//попадание
+					shoot_finished = true;
+				}
+				else
+				{
+					//промах
+					shoot_finished = false;
+				}
 			}
 		}
 	}
