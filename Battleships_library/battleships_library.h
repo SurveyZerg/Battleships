@@ -24,5 +24,7 @@ private:
 
 public:
 	Game();
+
+	bool checkWin();
 };
 
