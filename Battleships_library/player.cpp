@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include "player.h"
+#include "battleships.h"
+
 
 void  Player::Set_ship(Ship &ship, int Line, int Column, bool vertically)
 {
@@ -20,14 +22,16 @@ void Player::show_map()
 		{
 			if (map.ship_on_map[Line][Column])
 			{
-				std::cout << "| ";
+				//std::cout << "| ";
+                printPoint(Line, Column);
 			}
 			else
 			{
-				std::cout << "- ";
+				//std::cout << "- ";
+                clearPoint(Line, Column);
 			}
 		}
-		std::cout << std::endl;
+		//std::cout << std::endl;
 	}
 }
 

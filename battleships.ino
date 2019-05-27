@@ -1,7 +1,7 @@
 #include <MD_MAX72xx.h>
 #include <SPI.h>
 
-#include <battleships.h>
+//#include <battleships.h>
 
 #define DEBUG 0
 
@@ -47,13 +47,15 @@ void setup() {
     #endif
     Serial.begin(9600);
     
-    // Can do illustration if some map here to show that it is a "Battleships" game
-    blinkingPoint(readVoltage1(), readVoltage2());
+    // Can do illustration of some default map here to show that it is a "Battleships" game
+    
+    //blinkingPoint(readVoltage1(), readVoltage2());
     
     Game battleships;
     
     bool orientation = 1; // 1 means vertically; 0 means horisontally
     bool Player = 0; // 0 means player1; 1 means player2
+    drawPlayer(Player);
     int shipsCounter = 0;
     int currentShipSize = 3;
     bool buttonON = 0;
@@ -70,35 +72,43 @@ void loop() {
     
     // Setting ships ------------------------------------------------------------------------------------
     while (!buttonON) {
-        blinkingPoint(readVoltage1(), readVoltage2()); // Blinks when player chooses the location with Potentiometer
+        //blinkingPoint(readVoltage1(), readVoltage2());
+        blinkingShip(readVoltage1(), readVoltage2(), currentShipSize, orientation);
+        //getPlayer()->show_map();
     }
     
     if (button2ON)
         orientation = !orientation;
     
     if (buttonON) {
+        // Put the ship here if player knocked the button
         if (getPlayer()->checkAroundShip( readVoltage1(), readVoltage2(), currentShipSize, orientation)) {
             // We cannot put new ships here
             //break;
+            resetMatrix();
+            drawPlayer(Player); //???
+            getPlayer()->show_map();
         }
         else {
-            // Put the ship here if player knocked the button
-            // where to get shipPtr ??????
-            getPlayer()->map.Set_ship(shipPtr????????, readVoltage1(), readVoltage2(), orientation);
+            Ship* newShip = new Ship(currentShipSize); // May be PROBLEM here !!!!! check!!!!!
+            getPlayer()->Set_ship(newShip, readVoltage1(), readVoltage2(), orientation);
             ++shipsCounter;
             if (shipsCounter == 2 || shipsCounter == 6)
                 --currentShipSize;
             Player = !Player;
+            resetMatrix();
+            drawPlayer(Player);
+            getPlayer()->show_map();
         }
     }
     
     // Starting game ------------------------------------------------------------------------------------
-    if (shipsCounter == 12)
+    if (shipsCounter == 12) {
         // The game should begin here
-       
+        
+    }
 
 }
-
 
 
 
